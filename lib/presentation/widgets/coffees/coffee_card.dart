@@ -70,9 +70,9 @@ class _Slide extends StatelessWidget {
             height: 5,
           ),
 
-          // Rating
+          // Buttons
           SizedBox(
-            width: 150,
+            width: 350,
             child: Row(
               children: [
                 Icon(
@@ -83,20 +83,93 @@ class _Slide extends StatelessWidget {
                   width: 3,
                 ),
                 Text(
-                  '5',
+                  '7',
                   style: textStyle.bodyMedium
                       ?.copyWith(color: Colors.yellow.shade800),
                 ),
-                // const Spacer(),
                 const SizedBox(width: 20),
                 Text(
                   '3.91k',
                   style: textStyle.bodySmall,
-                )
+                ),
+                const Spacer(),
+                const _CancelButton(),
+                const SizedBox(width: 30),
+                const _FavoriteButton(),
               ],
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _CancelButton extends StatelessWidget {
+  const _CancelButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 3,
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: Center(
+        child: IconButton(
+          icon: const Icon(
+            Icons.cancel_rounded,
+            color: Colors.red,
+            size: 25,
+          ),
+          onPressed: () {
+            print('Botón presionado');
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _FavoriteButton extends StatelessWidget {
+  const _FavoriteButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 3,
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: Center(
+        child: IconButton(
+          icon: const Icon(
+            Icons.favorite,
+            color: Colors.green,
+            size: 25,
+          ),
+          onPressed: () {
+            print('Botón presionado');
+          },
+        ),
       ),
     );
   }

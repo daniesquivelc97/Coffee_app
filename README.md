@@ -1,18 +1,18 @@
 # coffee_app
 
-A new Flutter project.
+Coffe App project created with Riverpod.
+
+https://github.com/daniesquivelc97/Coffee_app/assets/40219602/1318505e-9d87-4276-941e-972fff5b8632
+
+<img width="423" alt="Screenshot 2024-04-05 at 17 35 37" src="https://github.com/daniesquivelc97/Coffee_app/assets/40219602/fedc6a1f-6bf6-424a-a970-4712b29a40bf">
+
+<img width="383" alt="Screenshot 2024-04-05 at 17 35 48" src="https://github.com/daniesquivelc97/Coffee_app/assets/40219602/824692ca-94bd-4eb8-9b8f-0400f179c164">
 
 ## Getting Started
 
-Run this command before executing the app: flutter pub run build_runner build
+Run flutter pub get
 
-This project is a starting point for a Flutter application.
+Then, run this command before executing the app: flutter pub run build_runner build
 
-A few resources to get you started if this is your first Flutter project:
+Finally, the command flutter run 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

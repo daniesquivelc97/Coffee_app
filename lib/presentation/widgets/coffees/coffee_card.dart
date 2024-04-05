@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:coffee_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CoffeeCard extends StatefulWidget {
   const CoffeeCard(
@@ -15,8 +17,9 @@ class CoffeeCard extends StatefulWidget {
 class _CoffeeCardState extends State<CoffeeCard> {
   @override
   Widget build(BuildContext context) {
+    final deviceData = MediaQuery.of(context).size;
     return SizedBox(
-      height: 350,
+      height: deviceData.height * 0.3,
       child: Column(
         children: [
           if (widget.title != null || widget.subtitle != null)
@@ -41,14 +44,18 @@ class _Slide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
+    final deviceData = MediaQuery.of(context).size;
+    // final isLoading = ref.watch(currentCoffeeImageProvider.notifier).isLoading;
+    // print('loading $isLoading');
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 350,
-            height: 400,
+            width: deviceData.width * 0.85,
+            height: deviceData.height * 0.3,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.network(
@@ -72,16 +79,14 @@ class _Slide extends StatelessWidget {
 
           // Buttons
           SizedBox(
-            width: 350,
+            width: deviceData.width * 0.85,
             child: Row(
               children: [
                 Icon(
                   Icons.star_half_outlined,
                   color: Colors.yellow.shade800,
                 ),
-                const SizedBox(
-                  width: 3,
-                ),
+                const SizedBox(width: 3),
                 Text(
                   '7',
                   style: textStyle.bodyMedium
@@ -98,18 +103,18 @@ class _Slide extends StatelessWidget {
                 const _FavoriteButton(),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
 
-class _CancelButton extends StatelessWidget {
+class _CancelButton extends ConsumerWidget {
   const _CancelButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Container(
       width: 50,
       height: 50,
@@ -132,7 +137,9 @@ class _CancelButton extends StatelessWidget {
             size: 25,
           ),
           onPressed: () {
-            print('Botón presionado');
+            ref.read(currentCoffeeImageProvider.notifier).isLoading = false;
+            ref.read(currentCoffeeImageProvider.notifier).loadNextImage();
+            print('Cancel button');
           },
         ),
       ),
@@ -167,7 +174,7 @@ class _FavoriteButton extends StatelessWidget {
             size: 25,
           ),
           onPressed: () {
-            print('Botón presionado');
+            print('Favorite Button');
           },
         ),
       ),

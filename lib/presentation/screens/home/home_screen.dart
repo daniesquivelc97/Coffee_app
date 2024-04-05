@@ -5,40 +5,27 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
-    // required this.pageIndex,
+    required this.pageIndex,
   });
 
   static const name = 'home-screen';
-  // final int pageIndex;
+  final int pageIndex;
 
-  // final viewRoutes = const <Widget>[
-  //   HomeView(),
-  //   SizedBox(),
-  //   FavoritesView(),
-  // ];
+  final viewRoutes = const <Widget>[
+    HomeView(),
+    FavoritesView(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: HomeView(),
-      bottomNavigationBar: CustomBottomNavigation(currentIndex: 0),
+    return Scaffold(
+      body: IndexedStack(
+        index: pageIndex,
+        children: viewRoutes,
+      ),
+      bottomNavigationBar: CustomBottomNavigation(
+        currentIndex: pageIndex,
+      ),
     );
-    // return const Scaffold(
-    //     body: Column(
-    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //   children: [
-    //     CustomAppBar(),
-    //     CoffeesSlideshow(),
-    //   ],
-    // ));
-    //   return Scaffold(
-    //     body: IndexedStack(
-    //       index: pageIndex,
-    //       children: viewRoutes,
-    //     ),
-    //     bottomNavigationBar: CustomBottomNavigation(
-    //       currentIndex: pageIndex,
-    //     ),
-    //   );
   }
 }

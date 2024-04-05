@@ -8,8 +8,10 @@ final appRouter = GoRouter(
       path: '/home/:page',
       name: HomeScreen.name,
       builder: (context, state) {
-        // final pageIndex = int.parse(state.pathParameters['page'] ?? '0');
-        return const HomeScreen();
+        final pageIndex = int.parse(state.pathParameters['page'] ?? '0');
+        return HomeScreen(
+          pageIndex: pageIndex,
+        );
       },
     ),
     GoRoute(

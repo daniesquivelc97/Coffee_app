@@ -3,6 +3,7 @@ import 'package:coffee_app/domain/entities/coffee.dart';
 import 'package:coffee_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CoffeeCard extends StatefulWidget {
   const CoffeeCard(
@@ -112,7 +113,7 @@ class _Slide extends ConsumerWidget {
 }
 
 class _CancelButton extends ConsumerWidget {
-  const _CancelButton({super.key});
+  const _CancelButton();
 
   @override
   Widget build(BuildContext context, ref) {
@@ -140,7 +141,6 @@ class _CancelButton extends ConsumerWidget {
           onPressed: () {
             ref.read(currentCoffeeImageProvider.notifier).isLoading = false;
             ref.read(currentCoffeeImageProvider.notifier).loadNextImage();
-            print('Cancel button');
           },
         ),
       ),
@@ -152,8 +152,21 @@ class _FavoriteButton extends ConsumerWidget {
   final Coffee coffee;
   const _FavoriteButton(this.coffee);
 
+  _showToast(Color style) {
+    Fluttertoast.showToast(
+      msg: '¡Product added to favorites!',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: style,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+
   @override
   Widget build(BuildContext context, ref) {
+    final style = Theme.of(context).primaryColor;
     return Container(
       width: 50,
       height: 50,
@@ -177,9 +190,9 @@ class _FavoriteButton extends ConsumerWidget {
           ),
           onPressed: () {
             ref.read(currentCoffeeImageProvider.notifier).isLoading = false;
-            ref.watch(localStorageRepositoryProvider).toggleFavorite(coffee);
+            ref.read(favoriteCoffeesProvider.notifier).toggleFavorite(coffee);
             ref.read(currentCoffeeImageProvider.notifier).loadNextImage();
-            print('Favorite Button');
+            _showToast(style);
           },
         ),
       ),

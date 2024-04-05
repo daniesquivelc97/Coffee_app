@@ -1,9 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:coffee_app/domain/entities/coffee.dart';
-import 'package:coffee_app/presentation/providers/providers.dart';
+import 'package:coffee_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class CoffeeCard extends StatefulWidget {
   const CoffeeCard(
@@ -98,101 +97,13 @@ class _Slide extends ConsumerWidget {
                   style: textStyle.bodySmall,
                 ),
                 const Spacer(),
-                const _CancelButton(),
+                const CancelButton(),
                 const SizedBox(width: 30),
-                _FavoriteButton(coffee),
+                FavoriteButton(coffee),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _CancelButton extends ConsumerWidget {
-  const _CancelButton();
-
-  @override
-  Widget build(BuildContext context, ref) {
-    return Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 3,
-            blurRadius: 5,
-          ),
-        ],
-      ),
-      child: Center(
-        child: IconButton(
-          icon: const Icon(
-            Icons.cancel_rounded,
-            color: Colors.red,
-            size: 25,
-          ),
-          onPressed: () {
-            ref.read(currentCoffeeImageProvider.notifier).isLoading = false;
-            ref.read(currentCoffeeImageProvider.notifier).loadNextImage();
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class _FavoriteButton extends ConsumerWidget {
-  final Coffee coffee;
-  const _FavoriteButton(this.coffee);
-
-  _showToast(Color style) {
-    Fluttertoast.showToast(
-      msg: '¡Product added to favorites!',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: style,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context, ref) {
-    final style = Theme.of(context).primaryColor;
-    return Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 3,
-            blurRadius: 5,
-          ),
-        ],
-      ),
-      child: Center(
-        child: IconButton(
-          icon: const Icon(
-            Icons.favorite,
-            color: Colors.green,
-            size: 25,
-          ),
-          onPressed: () {
-            ref.read(currentCoffeeImageProvider.notifier).isLoading = false;
-            ref.read(favoriteCoffeesProvider.notifier).toggleFavorite(coffee);
-            ref.read(currentCoffeeImageProvider.notifier).loadNextImage();
-            _showToast(style);
-          },
-        ),
       ),
     );
   }

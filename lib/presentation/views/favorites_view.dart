@@ -69,9 +69,14 @@ class FavoritesViewState extends ConsumerState<FavoritesView> {
       );
     }
     return Scaffold(
-      body: CoffeeMasonry(
-        loadNextPage: loadNextPage,
-        coffees: favoriteCoffees,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 15.0),
+          child: CoffeeMasonry(
+            loadNextPage: loadNextPage,
+            coffees: favoriteCoffees,
+          ),
+        ),
       ),
     );
   }

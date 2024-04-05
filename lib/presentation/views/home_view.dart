@@ -1,3 +1,4 @@
+import 'package:coffee_app/domain/entities/coffee.dart';
 import 'package:coffee_app/presentation/providers/providers.dart';
 import 'package:coffee_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class HomeViewState extends ConsumerState<HomeView> {
           child: isLoading
               ? const Center(child: CircularProgressIndicator())
               : CoffeeCard(
-                  currentImage: currentImage.file,
+                  coffee: Coffee(file: currentImage.file),
                   title: 'Our Products',
                   subtitle: currentDate,
                 ),

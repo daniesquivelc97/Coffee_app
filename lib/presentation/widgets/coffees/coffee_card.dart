@@ -1,12 +1,13 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:coffee_app/domain/entities/coffee.dart';
 import 'package:coffee_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CoffeeCard extends StatefulWidget {
   const CoffeeCard(
-      {super.key, required this.currentImage, this.title, this.subtitle});
-  final String currentImage;
+      {super.key, required this.coffee, this.title, this.subtitle});
+  final Coffee coffee;
   final String? title;
   final String? subtitle;
 
@@ -28,21 +29,21 @@ class _CoffeeCardState extends State<CoffeeCard> {
               subtitle: widget.subtitle,
             ),
           const SizedBox(height: 15),
-          _Slide(image: widget.currentImage)
+          _Slide(coffee: widget.coffee)
         ],
       ),
     );
   }
 }
 
-class _Slide extends StatelessWidget {
-  final String image;
+class _Slide extends ConsumerWidget {
+  final Coffee coffee;
   const _Slide({
-    required this.image,
+    required this.coffee,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final textStyle = Theme.of(context).textTheme;
     final deviceData = MediaQuery.of(context).size;
     // final isLoading = ref.watch(currentCoffeeImageProvider.notifier).isLoading;
@@ -59,7 +60,7 @@ class _Slide extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.network(
-                image,
+                coffee.file,
                 fit: BoxFit.cover,
                 width: 150,
                 loadingBuilder: (context, child, loadingProgress) {
@@ -100,7 +101,7 @@ class _Slide extends StatelessWidget {
                 const Spacer(),
                 const _CancelButton(),
                 const SizedBox(width: 30),
-                const _FavoriteButton(),
+                _FavoriteButton(coffee),
               ],
             ),
           ),
@@ -147,11 +148,12 @@ class _CancelButton extends ConsumerWidget {
   }
 }
 
-class _FavoriteButton extends StatelessWidget {
-  const _FavoriteButton();
+class _FavoriteButton extends ConsumerWidget {
+  final Coffee coffee;
+  const _FavoriteButton(this.coffee);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Container(
       width: 50,
       height: 50,
@@ -174,6 +176,9 @@ class _FavoriteButton extends StatelessWidget {
             size: 25,
           ),
           onPressed: () {
+            ref.read(currentCoffeeImageProvider.notifier).isLoading = false;
+            ref.watch(localStorageRepositoryProvider).toggleFavorite(coffee);
+            ref.read(currentCoffeeImageProvider.notifier).loadNextImage();
             print('Favorite Button');
           },
         ),

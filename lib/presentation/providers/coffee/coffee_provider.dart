@@ -19,7 +19,6 @@ class CoffeeNotifier extends StateNotifier<CoffeeResponse> {
   Future<void> loadNextImage() async {
     if (isLoading) return;
     isLoading = true;
-    print('Is loading $isLoading');
     final CoffeeResponse coffee = await imageUrl();
     state = coffee;
     isLoading = false;

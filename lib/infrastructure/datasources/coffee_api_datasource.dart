@@ -10,7 +10,6 @@ class CoffeeApiDatasource extends CoffeesDatasource {
   @override
   Future<CoffeeResponse> getCoffeeImage() async {
     final response = await dio.get('/random.json');
-    print('Response $response');
     return CoffeeResponse.fromJson(response.data);
   }
 }

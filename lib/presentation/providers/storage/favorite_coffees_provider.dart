@@ -28,7 +28,6 @@ class StorageCoffeesNotifier extends StateNotifier<Map<String, Coffee>> {
     return coffees;
   }
 
-  // TODO: Review if it is necessary
   Future<void> toggleFavorite(Coffee coffee) async {
     await localStorageRepository.toggleFavorite(coffee);
     final bool isCoffeeInFavorites = state[coffee.file] != null;

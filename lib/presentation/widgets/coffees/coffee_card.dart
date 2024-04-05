@@ -47,8 +47,6 @@ class _Slide extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final textStyle = Theme.of(context).textTheme;
     final deviceData = MediaQuery.of(context).size;
-    // final isLoading = ref.watch(currentCoffeeImageProvider.notifier).isLoading;
-    // print('loading $isLoading');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),

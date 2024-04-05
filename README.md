@@ -1,4 +1,4 @@
-# coffee_app
+# Coffee App
 
 Coffe App project created with Riverpod.
 

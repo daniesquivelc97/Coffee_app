@@ -8,7 +8,7 @@ class FavoriteButton extends ConsumerWidget {
   final Coffee coffee;
   const FavoriteButton(this.coffee, {super.key});
 
-  _showToast(Color style) {
+  showToast(Color style) {
     Fluttertoast.showToast(
       msg: '¡Product added to favorites!',
       toastLength: Toast.LENGTH_SHORT,
@@ -48,7 +48,7 @@ class FavoriteButton extends ConsumerWidget {
             ref.read(currentCoffeeImageProvider.notifier).isLoading = false;
             ref.read(favoriteCoffeesProvider.notifier).toggleFavorite(coffee);
             ref.read(currentCoffeeImageProvider.notifier).loadNextImage();
-            _showToast(style);
+            showToast(style);
           },
         ),
       ),

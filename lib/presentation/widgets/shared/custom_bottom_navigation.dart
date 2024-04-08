@@ -26,6 +26,7 @@ class CustomBottomNavigation extends StatelessWidget {
       onTap: (value) => _onItemTap(context, value),
       items: const [
         BottomNavigationBarItem(
+          key: Key('Home Icon'),
           icon: Icon(
             Icons.home_max,
           ),
@@ -33,6 +34,7 @@ class CustomBottomNavigation extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(
+            key: Key('Favorites Icon'),
             Icons.favorite_outline,
           ),
           label: 'Favorites',

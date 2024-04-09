@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import '../../domain/datasources/coffees_datasource.dart';
 
 class CoffeeApiDatasource extends CoffeesDatasource {
-  final dio = Dio(
+  var dio = Dio(
     BaseOptions(baseUrl: 'https://coffee.alexflipnote.dev'),
   );
   @override

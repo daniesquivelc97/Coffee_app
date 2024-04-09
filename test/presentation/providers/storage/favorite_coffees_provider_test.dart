@@ -19,12 +19,6 @@ void main() {
       notifier = StorageCoffeesNotifier(localStorageRepository: mockRepository);
     });
 
-    test('favoriteCoffeesProvider returns correct value', () async {
-      final container = ProviderContainer();
-      final favoriteCoffees = container.read(favoriteCoffeesProvider);
-      expect(favoriteCoffees, {});
-    });
-
     test('loadNextPage increments page and updates state correctly', () async {
       final coffee1 = Coffee(file: 'file1');
       final coffee2 = Coffee(file: 'file2');
@@ -53,6 +47,12 @@ void main() {
 
       await notifier.toggleFavorite(coffee);
       expect(notifier.state.containsKey(coffee.file), false);
+    });
+
+    test('favoriteCoffeesProvider returns correct value', () async {
+      final container = ProviderContainer();
+      final favoriteCoffees = container.read(favoriteCoffeesProvider);
+      expect(favoriteCoffees, {});
     });
   });
 }

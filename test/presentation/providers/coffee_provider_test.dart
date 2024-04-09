@@ -8,7 +8,7 @@ import 'package:mocktail/mocktail.dart';
 class MockCoffeeRepository extends Mock implements CoffeeRepository {}
 
 void main() {
-  group(CoffeeNotifier, () {
+  group('CoffeeNotifier', () {
     late MockCoffeeRepository mockRepository;
 
     setUp(() {

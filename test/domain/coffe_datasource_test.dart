@@ -1,7 +1,7 @@
 import 'package:coffee_app/domain/datasources/coffees_datasource.dart';
 import 'package:coffee_app/infrastructure/models/coffee_response.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockCoffeesDatasource extends Mock implements CoffeesDatasource {
   @override

@@ -14,7 +14,7 @@ Run flutter pub get
 
 Then, flutter run command.
 
-If you want to run the tests, use the command: flutter test 
+If you want to run the tests and see the coverage, use the command: flutter test --coverage
 
 ## Note:
 If the coffe.dart file is modified, run this command: flutter pub run build_runner build

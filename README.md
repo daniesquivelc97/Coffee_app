@@ -11,11 +11,13 @@ https://github.com/daniesquivelc97/Coffee_app/assets/40219602/1318505e-9d87-4276
 ## Getting Started
 
 Run flutter pub get
+
 Then, flutter run command.
 
 If you want to run the tests, use the command: flutter test 
 
-## Note: If the coffe.dart file is modified, run this command: flutter pub run build_runner build
+## Note:
+If the coffe.dart file is modified, run this command: flutter pub run build_runner build
 
  
 

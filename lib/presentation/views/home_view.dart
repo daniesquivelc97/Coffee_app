@@ -25,7 +25,7 @@ class HomeViewState extends ConsumerState<HomeView> {
   Widget build(BuildContext context) {
     final currentImage = ref.watch(currentCoffeeImageProvider);
     final isLoading = ref.watch(currentCoffeeImageProvider.notifier).isLoading;
-    final List<String> coffeeImages = imageUrl;
+    final List<Coffee> coffeeImages = imageUrl;
     final dateTime = DateTime.now();
     final currentDate = DateFormat('EEEE dd').format(dateTime);
     return Column(

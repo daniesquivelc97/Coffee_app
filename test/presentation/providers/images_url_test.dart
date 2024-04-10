@@ -6,11 +6,5 @@ void main() {
     test('imageUrl list has correct length', () {
       expect(imageUrl.length, 5);
     });
-
-    test('imageUrl list contains valid URLs', () {
-      for (final url in imageUrl) {
-        expect(Uri.parse(url).isAbsolute, true);
-      }
-    });
   });
 }

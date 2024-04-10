@@ -9,7 +9,7 @@ void main() {
   group('CoffeeCard Widget', () {
     testWidgets('CoffeeCard with title and subtitle',
         (WidgetTester tester) async {
-      final coffee = Coffee(file: imageUrl[0]);
+      final coffee = Coffee(file: imageUrl[0].file);
       await mockNetworkImagesFor(() => tester.pumpWidget(
             MaterialApp(
               home: Scaffold(
@@ -30,7 +30,7 @@ void main() {
 
     testWidgets('CoffeeCard without title and subtitle',
         (WidgetTester tester) async {
-      final coffee = Coffee(file: imageUrl[0]);
+      final coffee = Coffee(file: imageUrl[0].file);
       await mockNetworkImagesFor(() => tester.pumpWidget(
             MaterialApp(
               home: Scaffold(

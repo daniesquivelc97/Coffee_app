@@ -10,9 +10,9 @@ void main() {
     testWidgets('CoffeeMasonry with images', (WidgetTester tester) async {
       // Mock data
       final List<Coffee> coffees = [
-        Coffee(file: imageUrl[0]),
-        Coffee(file: imageUrl[1]),
-        Coffee(file: imageUrl[2]),
+        Coffee(file: imageUrl[0].file),
+        Coffee(file: imageUrl[1].file),
+        Coffee(file: imageUrl[2].file),
       ];
 
       await mockNetworkImagesFor(() => tester.pumpWidget(

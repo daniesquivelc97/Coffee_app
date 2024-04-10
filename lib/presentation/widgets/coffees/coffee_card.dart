@@ -21,15 +21,19 @@ class _CoffeeCardState extends State<CoffeeCard> {
     final deviceData = MediaQuery.of(context).size;
     return SizedBox(
       height: deviceData.height * 0.3,
-      child: Column(
+      child: ListView(
         children: [
-          if (widget.title != null || widget.subtitle != null)
-            _Title(
-              title: widget.title,
-              subtitle: widget.subtitle,
-            ),
-          const SizedBox(height: 15),
-          _Slide(coffee: widget.coffee)
+          Column(
+            children: [
+              if (widget.title != null || widget.subtitle != null)
+                _Title(
+                  title: widget.title,
+                  subtitle: widget.subtitle,
+                ),
+              const SizedBox(height: 15),
+              _Slide(coffee: widget.coffee)
+            ],
+          )
         ],
       ),
     );
@@ -55,21 +59,26 @@ class _Slide extends ConsumerWidget {
           SizedBox(
             width: deviceData.width * 0.85,
             height: deviceData.height * 0.3,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                coffee.file,
-                fit: BoxFit.cover,
-                width: 150,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress != null) {
-                    return const Center(
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    );
-                  }
-                  return FadeIn(child: child);
-                },
-              ),
+            child: FutureBuilder(
+              future: precacheImage(NetworkImage(coffee.file), context),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  );
+                } else {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: FadeIn(
+                      child: Image.network(
+                        coffee.file,
+                        fit: BoxFit.cover,
+                        width: 150,
+                      ),
+                    ),
+                  );
+                }
+              },
             ),
           ),
           const SizedBox(

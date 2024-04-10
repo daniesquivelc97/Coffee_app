@@ -19,6 +19,7 @@ class CoffeeMasonry extends StatefulWidget {
 
 class _CoffeeMasonryState extends State<CoffeeMasonry> {
   final ScrollController scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -42,24 +43,32 @@ class _CoffeeMasonryState extends State<CoffeeMasonry> {
         crossAxisSpacing: 10,
         itemCount: widget.coffees.length,
         itemBuilder: (context, index) {
-          if (index == 1) {
-            return Column(
-              children: [
-                const SizedBox(height: 40),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child:
-                      FadeIn(child: Image.network(widget.coffees[index].file)),
-                )
-              ],
-            );
-          }
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeIn(child: Image.network(widget.coffees[index].file)),
-          );
+          return _buildCoffeeItem(index);
         },
       ),
+    );
+  }
+
+  Widget _buildCoffeeItem(int index) {
+    return FutureBuilder(
+      future: precacheImage(NetworkImage(widget.coffees[index].file), context),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(strokeWidth: 2),
+          );
+        } else {
+          return FadeIn(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                widget.coffees[index].file,
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }

@@ -11,7 +11,6 @@ void main() {
     testWidgets('MainApp renders MaterialApp.router with correct configuration',
         (WidgetTester tester) async {
       await tester.runAsync(() async {
-        await tester.pumpWidget(const MainApp());
         await mockNetworkImagesFor(() => tester.pumpWidget(
               const ProviderScope(
                 child: MainApp(),
